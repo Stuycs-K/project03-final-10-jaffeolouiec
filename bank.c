@@ -28,5 +28,6 @@ void getTransaction() {
 
 	printf("Created a new named pipe %s\n", PIPE_NAME);
 
-	
+	fd[0] = open(PIPE_NAME, O_RDONLY);
+		
 }
