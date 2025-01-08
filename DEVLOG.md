@@ -5,6 +5,8 @@ This document must be updated daily by EACH group member.
 ## Chris
 
 ### 2024-01-08
+Wrote starting makefile and main function for the frontend user interface.
+### 2024-01-08
 Removed old cryptocurrency miner files.
 ### 2024-01-07
 Wrote basic functions for the user, including creating an account and sending a transaction.
