@@ -14,19 +14,19 @@ void createUser(){
     printf("Enter a 4-digit PIN: ");
     scanf("%d", &user.PIN);
     if (user.PIN < 1000 || user.PIN > 9999){
-        fprintf(stderr, "Invalid PIN\n");
-        exit(EXIT_FAILURE);
+        printf("Invalid PIN\n");
+        return;
     }
     user.wallet = 0;
     int file = open(USER_FILE, O_WRONLY | O_APPEND | O_CREAT, 0644);
     if (file < 0){
-        perror("File Open Error");
-        exit(EXIT_FAILURE);
+        printf("File Open Error\n");
+        return;
     }
     if (write(file, &user, sizeof(struct User)) != sizeof(struct User)){
-        perror("File Write Error");
+        printf("File Write Error\n");
         close(file);
-        exit(EXIT_FAILURE);
+        return;
     }
     close(file);
 }
@@ -43,13 +43,13 @@ void transaction(){
     scanf("%d", &transaction.confirmedPIN);
     int file = open(PIPE_NAME, O_WRONLY);
     if (file < 0){
-        perror("Pipe Opening Error");
-        exit(EXIT_FAILURE);
+        printf("Pipe Opening Error\n");
+        return;
     }
     if (write(file, &transaction, sizeof(struct Transaction)) != sizeof(struct Transaction)){
-        perror("Transaction Send Error");
+        printf("Transaction Send Error\n");
         close(file);
-        exit(EXIT_FAILURE);
+        return;
     }
     close(file);
 }
