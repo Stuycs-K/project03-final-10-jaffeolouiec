@@ -1,6 +1,7 @@
 #include "user.h"
 #include <stdio.h>
 #include <stdlib.h>
+#include <unistd.h>
 
 // over here we need to save everything to a file
 void saveEverything() {
@@ -20,8 +21,12 @@ void updateBankAccounts() {
 void getTransaction() {
 	int fd[2];
 
-	if (pipe(fd) == -1) {
+	if (mkfifo(PIPE_NAME, 0644) == -1) {
 		perror("did not open");
 		exit(1);
 	}
+
+	printf("Created a new named pipe %s\n", PIPE_NAME);
+
+	
 }
