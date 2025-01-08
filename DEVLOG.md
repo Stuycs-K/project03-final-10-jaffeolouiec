@@ -16,8 +16,9 @@ Created basic files and function headers and outlined structs.
 Expanded description including how much time was spent on task.
 
 ## Otzar
-
-### 2024-01-07
+### 2024-01-08 - Proposal and README
+Updated proposal and readme.
+### 2024-01-07 - Project Outline
 Redid project outline to address issue. New project is a bank simulator.
 ### 2024-01-06 - Headers/Files
 Created basic files and function headers and outlined structs.
