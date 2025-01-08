@@ -1,8 +1,15 @@
 void createUser();
-struct user{
-  char[20] username;
-  char[20] password;
-  int coins_owned;
-  char[64] private_key;
-  char[64] public_key;
-}
+struct User {
+    char name[64];
+    int PIN;
+    int wallet;
+};
+
+struct Transaction {
+    char sender[64];
+    char receiver[64];
+    int amount;
+    int confirmedPIN;
+};
+void create_user();
+void transaction();
