@@ -7,10 +7,7 @@
 #include <sys/stat.h>
 #include "user.h"
 
-#define USER_FILE "bank_data.dat"
-#define PIPE_NAME "bank_pipe"
-
-void create_user(){
+void createUser(){
     struct User user;
     printf("Enter new username: ");
     fgets(user.name, 64, stdin);

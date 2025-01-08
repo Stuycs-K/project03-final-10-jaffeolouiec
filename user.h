@@ -1,4 +1,6 @@
-void createUser();
+#define USER_FILE "bankData.dat"
+#define PIPE_NAME "bankPipe"
+
 struct User {
     char name[64];
     int PIN;
@@ -11,5 +13,5 @@ struct Transaction {
     int amount;
     int confirmedPIN;
 };
-void create_user();
+void createUser();
 void transaction();
