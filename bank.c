@@ -19,7 +19,7 @@ void updateBankAccounts() {
 
 // get the transaction using a pipe
 void getTransaction() {
-	int fd[2];
+	int fd;
 
 	if (mkfifo(PIPE_NAME, 0644) == -1) {
 		perror("did not open");
@@ -28,6 +28,16 @@ void getTransaction() {
 
 	printf("Created a new named pipe %s\n", PIPE_NAME);
 
-	fd[0] = open(PIPE_NAME, O_RDONLY);
-		
+	if (open(PIPE_NAME, O_RDONLY) == -1) {
+		perror("failed to open pipe");
+		exit(1);
+	}	
+
+	ssize_t bytes_read = read(fd, &transaction, sizeof(struct Transaction));
+
+	printf("got the transaction");
+	printf("Sender: %s", transaction.sender);
+	printf("Receiver: %s", transaction.receiver);
+	printf("Amount: $%d\n", transaction.amount);
+	printf("PIN: %d\n", transaction.confirmedPIN);
 }
