@@ -21,7 +21,7 @@ Expanded description including how much time was spent on task.
 
 ## Otzar
 ### 2024-01-09 - Compiled bank program & Debug statements
-I was able to edit the bank program so that it finally compiled. 
+I was able to edit the bank program so that it finally compiled. Then, I looped it so it would always be listening and listen for a new transaction after processing one.
 ### 2024-01-09 - HW: Pipe
 Worked on finishing the pipe so that transactions could be sent. We have not tested it yet.
 ### 2024-01-08 - Bank
