@@ -3,5 +3,5 @@
 void getTransaction();
 void saveEverything();
 void loadBankAccounts();
-void updateBankAccounts();
+void updateBankAccounts(struct Transaction transaction);
 #endif

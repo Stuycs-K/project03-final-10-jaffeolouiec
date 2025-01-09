@@ -14,12 +14,12 @@ void loadBankAccounts() {
 
 }
 
-void updateBankAccounts() {
-
+void updateBankAccounts(struct Transaction transaction) {
+	
 }
 
 // get the transaction using a pipe
-int main() {
+void getTransaction() {
 	int fd;
 	struct Transaction * transaction;
 	transaction = (struct transaction *) malloc(sizeof(struct Transaction));
@@ -44,4 +44,10 @@ int main() {
 	printf("Receiver: %s", transaction->receiver);
 	printf("Amount: $%d\n", transaction->amount);
 	printf("PIN: %d\n", transaction->confirmedPIN);
+}
+
+int main() {
+	while (1) {
+		getTransaction();
+	}
 }
