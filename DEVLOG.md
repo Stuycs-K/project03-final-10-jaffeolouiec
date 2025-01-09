@@ -20,6 +20,8 @@ Created basic files and function headers and outlined structs.
 Expanded description including how much time was spent on task.
 
 ## Otzar
+### 2024-01-09 - HW: Pipe
+Worked on finishing the pipe so that transactions could be sent. We have not tested it yet.
 ### 2024-01-08 - Bank
 Worked on creating the main structure for the file and creating a pipe.
 ### 2024-01-08 - Proposal and README
