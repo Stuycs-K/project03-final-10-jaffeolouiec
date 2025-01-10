@@ -4,6 +4,8 @@ This document must be updated daily by EACH group member.
 
 ## Chris
 
+### 2024-01-10
+Fixed Typos
 ### 2024-01-08
 Updated error handling and some formatting errors.
 ### 2024-01-08
