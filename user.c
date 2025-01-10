@@ -17,7 +17,7 @@ void createUser(){
         printf("Invalid PIN\n");
         return;
     }
-    user.wallet = 0;
+    user.wallet = 100;
     int file = open(USER_FILE, O_WRONLY | O_APPEND | O_CREAT, 0644);
     if (file < 0){
         printf("File Open Error\n");
@@ -52,4 +52,34 @@ void transaction(){
         return;
     }
     close(file);
+}
+
+void searchuser(char* username){
+  //Get size + Count size needed (From readdata)
+  int r_file = open(USER_FILE, O_RDONLY);
+  struct User user;
+  fstat(r_file, &user);
+  int fsize = user.st_size;
+  int esize = sizeof(struct User);
+  int count = fsize/esize;
+  struct User *users = (struct User *)malloc(fsize);
+  read(r_file, users, fsize);
+  close(r_file);
+  //Index
+  int i = 0;
+  while (i < count){
+
+  }
+  if (username){
+    printf("Invalid username.\n");
+    free(entries);
+    return;
+  }
+  //Data
+  printf("Enter year pop boro: ");
+  scanf("%d %d %[^\n]",&entries[index - 1].year,&entries[index - 1].population,entries[index - 1].boro);
+  int w_file = open(USER_FILE, O_WRONLY);
+  close(w_file);
+  free(entries);
+  printf("File updated successfully.\n");
 }

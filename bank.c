@@ -15,7 +15,7 @@ void loadBankAccounts() {
 }
 
 void updateBankAccounts(struct Transaction transaction) {
-	
+
 }
 
 // get the transaction using a pipe
@@ -23,7 +23,7 @@ void getTransaction(int fd, struct Transaction * transaction) {
 	if (open(PIPE_NAME, O_RDONLY) == -1) {
 		perror("failed to open pipe");
 		exit(1);
-	}	
+	}
 
 	ssize_t bytes_read = read(fd, &transaction, sizeof(struct Transaction));
 
@@ -38,10 +38,10 @@ void getTransaction(int fd, struct Transaction * transaction) {
 
 // in the future, for every 10 transactions, we will write to the disk; also when the file is closed
 int main() {
-	int fd; 
+	int fd;
   struct Transaction * transaction;
   transaction = (struct transaction *) malloc(sizeof(struct Transaction));
-  
+
   if (mkfifo(PIPE_NAME, 0644) == -1) {
     perror("did not open");
     exit(1);
