@@ -20,6 +20,8 @@ Created basic files and function headers and outlined structs.
 Expanded description including how much time was spent on task.
 
 ## Otzar
+### 2024-01-10 - Signal Catchers
+Started signal catchers for SIGINT.
 ### 2024-01-09 - Compiled bank program & Debug statements
 I was able to edit the bank program so that it finally compiled. Then, I looped it so it would always be listening and listen for a new transaction after processing one.
 ### 2024-01-09 - HW: Pipe
