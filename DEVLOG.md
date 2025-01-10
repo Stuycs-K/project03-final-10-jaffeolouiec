@@ -4,6 +4,8 @@ This document must be updated daily by EACH group member.
 
 ## Chris
 
+### 2025-01-10
+Started writing user confirmation function/user search function.
 ### 2024-01-10
 Fixed Typos
 ### 2024-01-08
