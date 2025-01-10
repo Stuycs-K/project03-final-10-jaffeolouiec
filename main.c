@@ -14,7 +14,7 @@ int main(int argc, char* argv[]){
       transaction();
     }
     else{
-      printf("~~~~~~~~~~~~~~~~~~~~\nWelcome to the bank. Enter one of the ARGS='' below to get started:\n1.   'Create',=\n2.   'Transaction'\n~~~~~~~~~~~~~~~~~~~~\n");
+      printf("~~~~~~~~~~~~~~~~~~~~\nWelcome to the bank. Enter one of the ARGS='' below to get started:\n1.   'Create'\n2.   'Transaction'\n~~~~~~~~~~~~~~~~~~~~\n");
     }
   }
   else{
