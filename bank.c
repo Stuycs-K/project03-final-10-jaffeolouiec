@@ -38,8 +38,6 @@ void getTransaction(int fd[2], struct Transaction * transaction) {
 		exit(1);
 	}	
 
-	close(fd[1]);
-
 	printf("getTransaction - before bytes_read\n");
 
 	ssize_t bytes_read = read(fd, &transaction, sizeof(struct Transaction));
@@ -57,7 +55,7 @@ void getTransaction(int fd[2], struct Transaction * transaction) {
 int main() {
 	signal(SIGINT, sigint_handler);
 
-	int fd[2]; 
+	int fd; 
   struct Transaction * transaction;
   transaction = (struct transaction *) malloc(sizeof(struct Transaction));
   

@@ -46,17 +46,16 @@ void transaction(){
 
 		//printf("Here are the vars: %s %s %d %d\n", transaction->sender, transaction->receiver, transaction->amount, transaction->confirmedPIN);
 
-    int file = open(PIPE_NAME, O_WRONLY);
-    if (file < 0){
+    int fd = open(PIPE_NAME, O_WRONLY);
+    if (fd < 0){
         printf("Pipe Opening Error\n");
         return;
     }
-    if (write(file, &transaction, sizeof(struct Transaction)) != sizeof(struct Transaction)){
+
+    if (write(fd, &transaction, sizeof(struct Transaction) + 1) == -1){
         printf("Transaction Send Error\n");
-        close(file);
         return;
     } else {
 				printf("success!\n");
 		}
-    close(file);
 }
