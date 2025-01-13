@@ -68,18 +68,13 @@ void searchuser(char* username){
   //Index
   int i = 0;
   while (i < count){
-
+    scanf("%d %d %[^\n]",&entries[i - 1].year,&entries[i - 1].population,entries[i - 1].boro);
+    int w_file = open(USER_FILE, O_WRONLY);
   }
   if (username){
     printf("Invalid username.\n");
     free(entries);
     return;
   }
-  //Data
-  printf("Enter year pop boro: ");
-  scanf("%d %d %[^\n]",&entries[index - 1].year,&entries[index - 1].population,entries[index - 1].boro);
-  int w_file = open(USER_FILE, O_WRONLY);
-  close(w_file);
-  free(entries);
-  printf("File updated successfully.\n");
+  printf("User search Successful.\n");
 }
