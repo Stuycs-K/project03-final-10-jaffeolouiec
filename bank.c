@@ -51,6 +51,20 @@ void getTransaction() {
 	printf("Amount: $%d\n", transaction.amount);
 	printf("PIN: %d\n", transaction.confirmedPIN);
 
+	struct User * user1 = searchUser(transaction.sender);
+	struct User *	 user2 = searchUser(transaction.receiver);
+
+	// See if the transaction should fail
+	// See if both users exist
+	if (user1 == NULL || user2 == NULL) {return;}
+	// See if user1's pin is right
+	if (transaction.confirmedPIN == user1.PIN) {return;}
+	// Make sure user1's bank account has enough money
+	if (user1.wallet <= transaction.amount) {return;}
+
+	// At this point, if we are still here, that means that we are good and can send the money
+	make_transaction(transaction, user1, user2);
+
 	close(fd);
 }
 
