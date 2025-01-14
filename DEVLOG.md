@@ -24,6 +24,8 @@ Created basic files and function headers and outlined structs.
 Expanded description including how much time was spent on task.
 
 ## Otzar
+### 2024-01-13-14 - Fixed bug
+Now you can send transactions between users so the bulk of this is done!
 ### 2024-01-10 - Signal Catchers
 Started signal catchers for SIGINT.
 ### 2024-01-09 - Compiled bank program & Debug statements
