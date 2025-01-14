@@ -32,8 +32,8 @@ void createUser(){
 }
 
 void transaction(){
-		struct Transaction *transaction = malloc(sizeof(struct Transaction));   
- 
+		struct Transaction *transaction = malloc(sizeof(struct Transaction));
+
 		printf("Enter username: ");
     fgets(transaction->sender, 64, stdin);
     printf("Enter receiver's username: ");
@@ -63,7 +63,7 @@ void transaction(){
 		close(fd);
 		free(transaction);
 }
-
+/*
 void searchuser(char* username){
   //Get size + Count size needed (From readdata)
   int r_file = open(USER_FILE, O_RDONLY);
@@ -88,3 +88,4 @@ void searchuser(char* username){
   }
   printf("User search Successful.\n");
 }
+*/
