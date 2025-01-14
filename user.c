@@ -32,26 +32,36 @@ void createUser(){
 }
 
 void transaction(){
-    struct Transaction transaction;
-    printf("Enter username: ");
-    fgets(transaction.sender, 64, stdin);
+		struct Transaction *transaction = malloc(sizeof(struct Transaction));   
+ 
+		printf("Enter username: ");
+    fgets(transaction->sender, 64, stdin);
     printf("Enter receiver's username: ");
-    fgets(transaction.receiver, 64, stdin);
+    fgets(transaction->receiver, 64, stdin);
     printf("Enter amount of $: ");
-    scanf("%d", &transaction.amount);
+    scanf("%d", &transaction->amount);
+		getchar();
     printf("Enter PIN: ");
-    scanf("%d", &transaction.confirmedPIN);
-    int file = open(PIPE_NAME, O_WRONLY);
-    if (file < 0){
+    scanf("%d", &transaction->confirmedPIN);
+		getchar();
+
+		//printf("Here are the vars: %s %s %d %d\n", transaction->sender, transaction->receiver, transaction->amount, transaction->confirmedPIN);
+
+    int fd = open(PIPE_NAME, O_WRONLY);
+    if (fd < 0){
         printf("Pipe Opening Error\n");
         return;
     }
-    if (write(file, &transaction, sizeof(struct Transaction)) != sizeof(struct Transaction)){
-        printf("Transaction Send Error\n");
-        close(file);
+
+    if (write(fd, transaction, sizeof(struct Transaction)) == -1) {
+				printf("Transaction Send Error\n");
         return;
-    }
-    close(file);
+    } else {
+				printf("success!\n");
+		}
+
+		close(fd);
+		free(transaction);
 }
 
 void searchuser(char* username){
