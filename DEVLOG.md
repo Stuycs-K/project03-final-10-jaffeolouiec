@@ -4,6 +4,8 @@ This document must be updated daily by EACH group member.
 
 ## Chris
 ### 2025-01-14
+Got Search function to almost run all the way (still seg faults)
+### 2025-01-14
 Got initial bank pipe reading/user transaction send reading to work.
 ### 2025-01-13
 Worked on user confirmation function/user search function, set layout w/ while loop
