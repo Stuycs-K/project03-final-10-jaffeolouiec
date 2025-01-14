@@ -32,21 +32,24 @@ void updateBankAccounts(struct Transaction transaction) {
 }
 
 // get the transaction using a pipe
-void getTransaction(int fd[2], struct Transaction * transaction) {
-	if (open(PIPE_NAME, O_RDONLY) == -1) {
-		perror("failed to open pipe");
-		exit(1);
-	}	
-
+void getTransaction() {
+	int fd = open(PIPE_NAME, O_RDONLY);
 	printf("getTransaction - before bytes_read\n");
 
+	struct Transaction transaction;
 	ssize_t bytes_read = read(fd, &transaction, sizeof(struct Transaction));
 
+	if (bytes_read != sizeof(struct Transaction)) {
+		perror("error with the bytes");
+		close(fd);
+		return;
+	}
+
 	printf("got the transaction\n");
-	printf("Sender: %s\n", transaction->sender);
-	printf("Receiver: %s\n", transaction->receiver);
-	printf("Amount: $%d\n", transaction->amount);
-	printf("PIN: %d\n", transaction->confirmedPIN);
+	printf("Sender: %s\n", transaction.sender);
+	printf("Receiver: %s\n", transaction.receiver);
+	printf("Amount: $%d\n", transaction.amount);
+	printf("PIN: %d\n", transaction.confirmedPIN);
 
 	close(fd);
 }
@@ -55,10 +58,6 @@ void getTransaction(int fd[2], struct Transaction * transaction) {
 int main() {
 	signal(SIGINT, sigint_handler);
 
-	int fd; 
-  struct Transaction * transaction;
-  transaction = (struct transaction *) malloc(sizeof(struct Transaction));
-  
   if (mkfifo(PIPE_NAME, 0644) == -1) {
     perror("did not open");
     exit(1);
@@ -67,6 +66,6 @@ int main() {
   printf("Created a new named pipe %s\n", PIPE_NAME);
 
 	while (1) {
-		getTransaction(fd, transaction);
+		getTransaction();
 	}
 }

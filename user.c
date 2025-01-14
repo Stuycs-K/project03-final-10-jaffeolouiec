@@ -32,17 +32,18 @@ void createUser(){
 }
 
 void transaction(){
-		struct Transaction * transaction;
-		transaction = (struct transaction *) malloc(sizeof(struct Transaction));
-    
+		struct Transaction *transaction = malloc(sizeof(struct Transaction));   
+ 
 		printf("Enter username: ");
     fgets(transaction->sender, 64, stdin);
     printf("Enter receiver's username: ");
     fgets(transaction->receiver, 64, stdin);
     printf("Enter amount of $: ");
     scanf("%d", &transaction->amount);
+		getchar();
     printf("Enter PIN: ");
     scanf("%d", &transaction->confirmedPIN);
+		getchar();
 
 		//printf("Here are the vars: %s %s %d %d\n", transaction->sender, transaction->receiver, transaction->amount, transaction->confirmedPIN);
 
@@ -52,10 +53,13 @@ void transaction(){
         return;
     }
 
-    if (write(fd, &transaction, sizeof(struct Transaction) + 1) == -1){
-        printf("Transaction Send Error\n");
+    if (write(fd, transaction, sizeof(struct Transaction)) == -1) {
+				printf("Transaction Send Error\n");
         return;
     } else {
 				printf("success!\n");
 		}
+
+		close(fd);
+		free(transaction);
 }
