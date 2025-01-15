@@ -6,6 +6,7 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 #include "user.h"
+#include <dirent.h>
 
 void createUser(){
     struct User user;
@@ -45,9 +46,12 @@ void transaction(){
     scanf("%d", &transaction->confirmedPIN);
 		getchar();
 
+    searchuser(transaction->sender);
+    /*
     if (strcmp(*(searchuser(transaction->sender))->name,transaction->sender)==0){
       printf("Search success\n");
     }
+    */
 
 		//printf("Here are the vars: %s %s %d %d\n", transaction->sender, transaction->receiver, transaction->amount, transaction->confirmedPIN);
 
@@ -70,31 +74,26 @@ void transaction(){
 
 struct User* searchuser(char* username){
   //Reads user file
-  printf("I made it\n");
   int r_file = open(USER_FILE, O_RDONLY);
   struct User *user;
-  int fsize;
-  fstat(r_file, fsize);
+  struct stat file;
+  fstat(r_file, &file);
+  int fsize = file.st_size;
   int esize = sizeof(struct User);
   int count = fsize/esize; //count is the number of users
   struct User *users = (struct User *)malloc(fsize);
   read(r_file, users, fsize);
   close(r_file);
-  printf("I made it2\n");
   //Go through user file
   int i = 0; //Index
   while (i < count){
-    printf("I made it 3\n");
-    /*
-    if(strcmp(*users[i].name, *username)==0){
+    if(strcmp((&users[i])->name, username)==0){
       printf("User search Successful.\n");
       free(users);
       return &(users[i]);
     }
-    */
     i++;
   }
-  printf("Invalid username.\n");
-  free(users);
-  return NULL;
+  free(user);
+  return user;
 }
