@@ -64,6 +64,20 @@ void transaction(){
 		free(transaction);
 }
 
+/*username would be a unique value*/
+void changeUser(char* username, struct User * user) {
+	int fd = open(USER_FILE, O_RDWR);
+
+	struct User user;
+  fstat(fd, &user);
+  int fsize = user.st_size;
+  int esize = sizeof(struct User);
+  int count = fsize/esize;
+  struct User *users = (struct User *)malloc(fsize);
+  read(r_file, users, fsize);
+  close(r_file);	
+}
+
 void searchuser(char* username){
   //Get size + Count size needed (From readdata)
   int r_file = open(USER_FILE, O_RDONLY);
