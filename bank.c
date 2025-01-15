@@ -17,18 +17,9 @@ void sigint_handler(int sig) {
     }
 }
 
-// over here we need to save everything to a file
-void saveEverything() {
-
-}
-
-// get the bank account information from the file
-void loadBankAccounts() {
-
-}
-
-void updateBankAccounts(struct Transaction transaction) {
-
+void makeTransaction(struct Transaction transaction, struct User * user1, struct User * user2) {
+		user1->wallet -= transaction.amount;
+		user2->wallet += transaction.amount;
 }
 
 // get the transaction using a pipe
@@ -58,12 +49,12 @@ void getTransaction() {
 	// See if both users exist
 	if (user1 == NULL || user2 == NULL) {return;}
 	// See if user1's pin is right
-	if (transaction.confirmedPIN == user1.PIN) {return;}
+	if (transaction.confirmedPIN == user1->PIN) {return;}
 	// Make sure user1's bank account has enough money
-	if (user1.wallet <= transaction.amount) {return;}
+	if (user1->wallet <= transaction.amount) {return;}
 
 	// At this point, if we are still here, that means that we are good and can send the money
-	make_transaction(transaction, user1, user2);
+	makeTransaction(transaction, user1, user2);
 
 	close(fd);
 }
