@@ -42,8 +42,8 @@ void getTransaction() {
 	printf("Amount: $%d\n", transaction.amount);
 	printf("PIN: %d\n", transaction.confirmedPIN);
 
-	struct User * user1 = searchUser(transaction.sender);
-	struct User *	 user2 = searchUser(transaction.receiver);
+	struct User * user1 = searchuser(transaction.sender);
+	struct User *	 user2 = searchuser(transaction.receiver);
 
 	// See if the transaction should fail
 	// See if both users exist

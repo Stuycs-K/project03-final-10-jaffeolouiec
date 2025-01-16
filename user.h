@@ -14,5 +14,7 @@ struct Transaction {
     int amount;
     int confirmedPIN;
 };
+
+struct User* searchuser(char* username);
 void createUser();
 void transaction();

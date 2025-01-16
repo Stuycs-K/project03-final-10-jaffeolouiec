@@ -3,7 +3,14 @@
 This document must be updated daily by EACH group member.
 
 ## Chris
-
+### 2025-01-14
+Updated Search function (still doesn't completely work)
+### 2025-01-14
+Got Search function to almost run all the way (still seg faults)
+### 2025-01-14
+Got initial bank pipe reading/user transaction send reading to work.
+### 2025-01-13
+Worked on user confirmation function/user search function, set layout w/ while loop
 ### 2025-01-10
 Started writing user confirmation function/user search function.
 ### 2024-01-10
@@ -24,6 +31,10 @@ Created basic files and function headers and outlined structs.
 Expanded description including how much time was spent on task.
 
 ## Otzar
+### 2024-01-15 - HW - started writing transaction function
+I have started making a function to do the actual transactions.
+### 2024-01-14 - Verifying
+Now I made a function to verify the transactions and worked with Chris to integrate functions.
 ### 2024-01-13-14 - Fixed bug
 Now you can send transactions between users so the bulk of this is done!
 ### 2024-01-10 - Signal Catchers
