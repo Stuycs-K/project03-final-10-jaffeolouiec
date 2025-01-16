@@ -47,13 +47,30 @@ void transaction(){
 		getchar();
 
     searchuser(transaction->sender);
-    /*
-    if (strcmp(*(searchuser(transaction->sender))->name,transaction->sender)==0){
-      printf("Search success\n");
+    if (strcmp((searchuser(transaction->sender))->name,transaction->sender)==0){
+      printf("First User Search Success\n");
+      if (strcmp((searchuser(transaction->sender))->name,transaction->sender)==0){
+        printf("Second User Search Success\n");
+        if(searchuser(transaction->sender)->PIN==transaction->confirmedPIN){
+          printf("Authenticated\n");
+          if(searchuser(transaction->sender)->wallet-transaction->amount>=0){
+            printf("Money Success\n");
+          }
+          else{
+            printf("Not enough money failure :((((\n");
+          }
+        }
+        else{
+          printf("Fraud Attempt\n");
+        }
+      }
+      else{
+        printf("Second User Search Failure\n");
+      }
     }
-    */
-
-		//printf("Here are the vars: %s %s %d %d\n", transaction->sender, transaction->receiver, transaction->amount, transaction->confirmedPIN);
+    else{
+      printf("First User Search Failure\n");
+    }
 
     int fd = open(PIPE_NAME, O_WRONLY);
     if (fd < 0){
@@ -83,7 +100,7 @@ void changeUser(char* username, struct User * user) {
   int count = fsize/esize;
   struct User *users = (struct User *)malloc(fsize);
   read(r_file, users, fsize);
-  close(r_file);	
+  close(r_file);
 */}
 
 struct User* searchuser(char* username){
@@ -108,6 +125,6 @@ struct User* searchuser(char* username){
     }
     i++;
   }
-  free(user);
+  free(users);
   return user;
 }
