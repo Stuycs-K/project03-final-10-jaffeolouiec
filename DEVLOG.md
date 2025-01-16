@@ -33,6 +33,8 @@ Created basic files and function headers and outlined structs.
 Expanded description including how much time was spent on task.
 
 ## Otzar
+### 2024-01-16 - changeUser
+Finished writing the change user function, which works with this disk.
 ### 2024-01-15 - Save File
 Writing the save file for the users after a transaction is made in user.c.
 ### 2024-01-15 - HW - started writing transaction function
