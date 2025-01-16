@@ -3,6 +3,8 @@
 This document must be updated daily by EACH group member.
 
 ## Chris
+### 2025-01-15
+Completely fixed user search function
 ### 2025-01-14
 Updated Search function (still doesn't completely work)
 ### 2025-01-14
@@ -31,6 +33,8 @@ Created basic files and function headers and outlined structs.
 Expanded description including how much time was spent on task.
 
 ## Otzar
+### 2024-01-15 - Save File
+Writing the save file for the users after a transaction is made in user.c.
 ### 2024-01-15 - HW - started writing transaction function
 I have started making a function to do the actual transactions.
 ### 2024-01-14 - Verifying
