@@ -3,6 +3,8 @@
 This document must be updated daily by EACH group member.
 
 ## Chris
+### 2025-01-17
+Updated makefile clean to remove bank and user files and the bank pipe, updated make compile to compile the bank as well, removed old client files from the cryptocurrency project.
 ### 2025-01-16
 Updated Transaction function so that it checks for the amount of  money in the sender's bank account and validates their pin (bug where \n is being included)
 ### 2025-01-16
