@@ -3,6 +3,10 @@
 This document must be updated daily by EACH group member.
 
 ## Chris
+### 2025-01-16
+Updated Transaction function so that it checks for the amount of  money in the sender's bank account and validates their pin (bug where \n is being included)
+### 2025-01-16
+Updated Transaction function so that it checks for the user's name & receiver's name.
 ### 2025-01-15
 Completely fixed user search function
 ### 2025-01-14
