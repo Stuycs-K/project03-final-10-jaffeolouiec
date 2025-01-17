@@ -90,18 +90,35 @@ void transaction(){
 }
 
 /*username would be a unique value*/
-void changeUser(char* username, struct User * user) {
+void changeUser(char* username, struct User * userToChange) {
 	int fd = open(USER_FILE, O_RDWR);
-/*
-	struct User user;
-  fstat(fd, &user);
-  int fsize = user.st_size;
+
+	struct User *user;
+  struct stat file;
+  fstat(r_file, &file);
+  int fsize = file.st_size;
   int esize = sizeof(struct User);
-  int count = fsize/esize;
+  int count = fsize/esize; //count is the number of users
   struct User *users = (struct User *)malloc(fsize);
   read(r_file, users, fsize);
   close(r_file);
-*/}
+  //Go through user file
+  int i = 0; //Index
+  while (i < count){
+    if(strcmp((&users[i])->name, username)==0){
+      printf("User search Successful.\n");
+			users[i] = userToChange;
+			break;
+    }   
+    i++;
+  }
+
+	// now we gotta save users
+
+  free(users);
+  return user;
+}
+                   
 
 struct User* searchuser(char* username){
   //Reads user file
