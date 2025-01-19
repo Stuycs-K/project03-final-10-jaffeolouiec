@@ -72,6 +72,8 @@ void getTransaction() {
     	write(fd, message, strlen(message)); // Write the error message
     	return;
 	}
+	printf("Successful Transaction");
+
 	// At this point, if we are still here, that means that we are good and can send the money
 	makeTransaction(transaction, user1, user2);
 	char* message = "Transaction Successful.";
