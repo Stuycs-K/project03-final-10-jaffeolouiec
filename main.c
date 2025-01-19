@@ -13,6 +13,10 @@ int main(int argc, char* argv[]){
     else if (strcmp(argv[1],"Transaction")==0){
       transaction();
     }
+    // get a user's info
+    else if (strcmp(argv[1],"Info")==0){
+      getInfo();
+    } 
     else{
       printf("~~~~~~~~~~~~~~~~~~~~\nWelcome to the bank. Enter one of the ARGS='' below to get started:\n1.   'Create'\n2.   'Transaction'\n~~~~~~~~~~~~~~~~~~~~\n");
     }

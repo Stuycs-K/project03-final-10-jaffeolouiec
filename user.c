@@ -96,28 +96,38 @@ void changeUser(char* username, struct User * userToChange) {
 
 	struct User *user;
   struct stat file;
-  fstat(r_file, &file);
+  fstat(fd, &file);
   int fsize = file.st_size;
   int esize = sizeof(struct User);
   int count = fsize/esize; //count is the number of users
   struct User *users = (struct User *)malloc(fsize);
-  read(r_file, users, fsize);
-  close(r_file);
+  read(fd, users, fsize);
+  close(fd);
   //Go through user file
   int i = 0; //Index
   while (i < count){
     if(strcmp((&users[i])->name, username)==0){
       printf("User search Successful.\n");
-			users[i] = userToChange;
+      users[i] = *userToChange;
 			break;
     }   
     i++;
   }
 
 	// now we gotta save users
+  fd = open(USER_FILE, O_WRONLY | O_TRUNC);
+  if (fd < 0){
+      printf("File Open Error\n");
+      return;
+  }
+
+  if (write(fd, users, fsize) != fsize){
+      printf("File Write Error\n");
+      close(fd);
+      return;
+  }
 
   free(users);
-  return user;
 }
                    
 
@@ -145,4 +155,21 @@ struct User* searchuser(char* username){
   }
   free(users);
   return user;
+}
+
+void getInfo() {
+  // ask the user for the username
+  char username[64];
+  printf("Enter the username: ");
+  fgets(username, 64, stdin);
+  // search for the user
+  struct User * user = searchuser(username);
+  if (user == NULL) {
+    printf("User not found\n");
+    return;
+  }
+  // print the user's info
+  printf("Name: %s\n", user->name);
+  printf("PIN: %d\n", user->PIN);
+  printf("Wallet: $%d\n", user->wallet);
 }
