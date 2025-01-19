@@ -56,6 +56,7 @@ void getTransaction() {
    		char* message = "One or both users do not exist.";
     	write(fd, message, strlen(message));
 		close(fd);
+		sleep(1);
     	return;
 	}
 	// See if user1's pin is right
@@ -63,6 +64,7 @@ void getTransaction() {
     	char* message = "Incorrect PIN.";
     	write(fd, message, strlen(message));
 		close(fd);
+		sleep(1);
     	return;
 	}
 	// Make sure user1's bank account has enough money
@@ -71,15 +73,17 @@ void getTransaction() {
 		printf("%s",message);
     	write(fd, message, strlen(message));
 		close(fd);
+		sleep(1);
     	return;
 	}
-	printf("Successful Transaction");
+	printf("Successful Transaction\n");
 
 	// At this point, if we are still here, that means that we are good and can send the money
 	makeTransaction(transaction, user1, user2);
 	char* message = "Transaction Successful.";
 	write(fd, message, strlen(message)); // Write the success message
 	close(fd);
+	sleep(1);
 }
 
 // in the future, for every 10 transactions, we will write to the disk; also when the file is closed
