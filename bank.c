@@ -66,6 +66,7 @@ void getTransaction() {
 	// Make sure user1's bank account has enough money
 	if (user1->wallet < transaction.amount) {
     	char* message = "Insufficient funds.";
+		printf("%s",message);
     	write(fd, message, strlen(message)); // Write the error message
     	return;
 	}
