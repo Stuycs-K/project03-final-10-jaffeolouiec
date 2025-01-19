@@ -65,6 +65,7 @@ void transaction(){
     }
     
     else {
+        sleep(1);
 			  printf("Transaction Send Success!\n");
         free(transaction);
         char receipt[50];
