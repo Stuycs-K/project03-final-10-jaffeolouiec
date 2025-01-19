@@ -18,3 +18,5 @@ struct Transaction {
 struct User* searchuser(char* username);
 void createUser();
 void transaction();
+void getInfo();
+void changeUser(char* username, struct User * userToChange);

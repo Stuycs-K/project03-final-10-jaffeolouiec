@@ -12,6 +12,8 @@ void createUser(){
     struct User user;
     printf("Enter new username: ");
     fgets(user.name, 64, stdin);
+    // remove newline character
+    user.name[strcspn(user.name, "\n")] = '\0';
     printf("Enter a 4-digit PIN: ");
     scanf("%d", &user.PIN);
     if (user.PIN < 1000 || user.PIN > 9999){
@@ -45,33 +47,6 @@ void transaction(){
     printf("Enter PIN: ");
     scanf("%d", &transaction->confirmedPIN);
 		getchar();
-
-    printf("%s\n",searchuser(transaction->sender)->name);
-    printf("%s\n",transaction->sender);
-    if (strcmp((searchuser(transaction->sender))->name,transaction->sender)==0){
-      printf("First User Search Success\n");
-      if (strcmp((searchuser(transaction->sender))->name,transaction->sender)==0){
-        printf("Second User Search Success\n");
-        if(searchuser(transaction->sender)->PIN==transaction->confirmedPIN){
-          printf("Authenticated\n");
-          if(searchuser(transaction->sender)->wallet-transaction->amount>=0){
-            printf("Money Success\n");
-          }
-          else{
-            printf("Not enough money failure :((((\n");
-          }
-        }
-        else{
-          printf("Fraud Attempt\n");
-        }
-      }
-      else{
-        printf("Second User Search Failure\n");
-      }
-    }
-    else{
-      printf("First User Search Failure\n");
-    }
 
     int fd = open(PIPE_NAME, O_WRONLY);
     if (fd < 0){
@@ -134,27 +109,37 @@ void changeUser(char* username, struct User * userToChange) {
 struct User* searchuser(char* username){
   //Reads user file
   int r_file = open(USER_FILE, O_RDONLY);
-  struct User *user;
+  if (r_file < 0){
+    perror("open");
+    return NULL;
+  }
+
   struct stat file;
   fstat(r_file, &file);
   int fsize = file.st_size;
   int esize = sizeof(struct User);
   int count = fsize/esize; //count is the number of users
+
   struct User *users = (struct User *)malloc(fsize);
   read(r_file, users, fsize);
   close(r_file);
+
   //Go through user file
+  struct User * foundUser = NULL;
   int i = 0; //Index
+
   while (i < count){
     if(strcmp((&users[i])->name, username)==0){
-      printf("User search Successful: %s.\n",(&users[i])->name);
-      free(users);
-      return (&users[i]);
+      foundUser = malloc(sizeof(struct User));
+      *foundUser = users[i];
+      break;
     }
     i++;
   }
+
+  // Free the memory
   free(users);
-  return user;
+  return foundUser;
 }
 
 void getInfo() {
@@ -162,6 +147,9 @@ void getInfo() {
   char username[64];
   printf("Enter the username: ");
   fgets(username, 64, stdin);
+  // remove newline character
+  username[strcspn(username, "\n")] = '\0';
+  
   // search for the user
   struct User * user = searchuser(username);
   if (user == NULL) {

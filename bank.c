@@ -22,6 +22,9 @@ void sigint_handler(int sig) {
 void makeTransaction(struct Transaction transaction, struct User * user1, struct User * user2) {
 		user1->wallet -= transaction.amount;
 		user2->wallet += transaction.amount;
+		// changeUser(char* username, struct User * userToChange)
+		changeUser(transaction.sender, user1);
+		changeUser(transaction.receiver, user2);
 }
 
 // get the transaction using a pipe
@@ -51,9 +54,9 @@ void getTransaction() {
 	// See if both users exist
 	if (user1 == NULL || user2 == NULL) {return;}
 	// See if user1's pin is right
-	if (transaction.confirmedPIN == user1->PIN) {return;}
+	if (transaction.confirmedPIN != user1->PIN) {return;}
 	// Make sure user1's bank account has enough money
-	if (user1->wallet <= transaction.amount) {return;}
+	if (user1->wallet < transaction.amount) {return;}
 
 	// At this point, if we are still here, that means that we are good and can send the money
 	makeTransaction(transaction, user1, user2);
