@@ -70,14 +70,11 @@ void getTransaction() {
     	write(fd, message, strlen(message)); // Write the error message
     	return;
 	}
-
 	// At this point, if we are still here, that means that we are good and can send the money
-	else{
-		makeTransaction(transaction, user1, user2);
-		char* message = "Transaction Successful.";
-		write(fd, message, strlen(message)); // Write the success message
-		close(fd);
-	}
+	makeTransaction(transaction, user1, user2);
+	char* message = "Transaction Successful.";
+	write(fd, message, strlen(message)); // Write the success message
+	close(fd);
 }
 
 // in the future, for every 10 transactions, we will write to the disk; also when the file is closed
