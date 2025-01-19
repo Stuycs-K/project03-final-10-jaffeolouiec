@@ -29,7 +29,7 @@ void makeTransaction(struct Transaction transaction, struct User * user1, struct
 
 // get the transaction using a pipe
 void getTransaction() {
-	int fd = open(PIPE_NAME, O_RDONLY);
+	int fd = open(PIPE_NAME, O_RDWR);
 	printf("getTransaction - before bytes_read\n");
 
 	struct Transaction transaction;
@@ -55,19 +55,22 @@ void getTransaction() {
 	if (user1 == NULL || user2 == NULL) {
    		char* message = "One or both users do not exist.";
     	write(fd, message, strlen(message));
+		close(fd);
     	return;
 	}
 	// See if user1's pin is right
 	if (transaction.confirmedPIN != user1->PIN) {
     	char* message = "Incorrect PIN.";
     	write(fd, message, strlen(message));
+		close(fd);
     	return;
 	}
 	// Make sure user1's bank account has enough money
 	if (user1->wallet < transaction.amount) {
     	char* message = "Insufficient funds.";
 		printf("%s",message);
-    	write(fd, message, strlen(message)); // Write the error message
+    	write(fd, message, strlen(message));
+		close(fd);
     	return;
 	}
 	printf("Successful Transaction");
