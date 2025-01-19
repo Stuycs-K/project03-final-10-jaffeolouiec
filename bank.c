@@ -6,6 +6,7 @@
 #include <signal.h>
 #include <sys/types.h>
 #include <sys/stat.h>
+#include <string.h>
 
 // signal handler
 void sigint_handler(int sig) {
