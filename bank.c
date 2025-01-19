@@ -52,15 +52,28 @@ void getTransaction() {
 
 	// See if the transaction should fail
 	// See if both users exist
-	if (user1 == NULL || user2 == NULL) {return;}
+	if (user1 == NULL || user2 == NULL) {
+   		char* message = "One or both users do not exist.";
+    	write(fd, message, strlen(message));
+    	return;
+	}
 	// See if user1's pin is right
-	if (transaction.confirmedPIN != user1->PIN) {return;}
+	if (transaction.confirmedPIN != user1->PIN) {
+    	char* message = "Incorrect PIN.";
+    	write(fd, message, strlen(message));
+    	return;
+	}
 	// Make sure user1's bank account has enough money
-	if (user1->wallet < transaction.amount) {return;}
+	if (user1->wallet < transaction.amount) {
+    	char* message = "Insufficient funds.";
+    	write(fd, message, strlen(message)); // Write the error message
+    	return;
+	}
 
 	// At this point, if we are still here, that means that we are good and can send the money
 	makeTransaction(transaction, user1, user2);
-
+	char* message = "Transaction Successful.";
+	write(fd, message, strlen(message)); // Write the success message
 	close(fd);
 }
 

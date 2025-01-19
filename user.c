@@ -62,12 +62,22 @@ void transaction(){
     if (write(fd, transaction, sizeof(struct Transaction)) == -1) {
 				printf("Transaction Send Error\n");
         return;
-    } else {
-				printf("success!\n");
+    }
+    
+    else {
+			  printf("Transaction Send Success!\n");
+        free(transaction);
+        char receipt[50];
+        ssize_t bytes_read = read(fd, receipt, sizeof(receipt) - 1);
+        if (bytes_read <= 0) {
+          perror("Error reading from file descriptor");
+          close(fd);
+          return;
+        }
+        receipt[bytes_read] = '\0';
+        printf("Transaction Status (From Bank): %s\n", receipt);
+        close(fd);
 		}
-
-		close(fd);
-		free(transaction);
 }
 
 /*username would be a unique value*/
