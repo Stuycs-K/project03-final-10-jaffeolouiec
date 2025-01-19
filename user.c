@@ -53,7 +53,7 @@ void transaction(){
     scanf("%d", &transaction->confirmedPIN);
 		getchar();
 
-    int fd = open(PIPE_NAME, O_WRONLY);
+    int fd = open(PIPE_NAME, O_RDWR);
     if (fd < 0){
         printf("Pipe Opening Error\n");
         return;
