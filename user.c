@@ -68,7 +68,7 @@ void transaction(){
 			  printf("Transaction Send Success!\n");
         free(transaction);
         char receipt[50];
-        ssize_t bytes_read = read(fd, receipt, sizeof(receipt) - 1);
+        ssize_t bytes_read = read(fd, receipt, 49);
         if (bytes_read <= 0) {
           perror("Error reading from file descriptor");
           close(fd);
