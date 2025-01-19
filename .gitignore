@@ -1,6 +1,7 @@
 # Custom
 ./bank
 ./user
+./bankData.dat
 
 # Prerequisites
 *.d
