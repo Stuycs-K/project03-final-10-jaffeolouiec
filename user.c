@@ -39,11 +39,16 @@ void transaction(){
 
 		printf("Enter username: ");
     fgets(transaction->sender, 64, stdin);
+    transaction->sender[strcspn(transaction->sender, "\n")] = '\0';
+
     printf("Enter receiver's username: ");
     fgets(transaction->receiver, 64, stdin);
+    transaction->receiver[strcspn(transaction->receiver, "\n")] = '\0';
+    
     printf("Enter amount of $: ");
     scanf("%d", &transaction->amount);
 		getchar();
+    
     printf("Enter PIN: ");
     scanf("%d", &transaction->confirmedPIN);
 		getchar();
