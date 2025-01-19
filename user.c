@@ -46,7 +46,8 @@ void transaction(){
     scanf("%d", &transaction->confirmedPIN);
 		getchar();
 
-    searchuser(transaction->sender);
+    printf("%s\n",searchuser(transaction->sender)->name);
+    printf("%s\n",transaction->sender);
     if (strcmp((searchuser(transaction->sender))->name,transaction->sender)==0){
       printf("First User Search Success\n");
       if (strcmp((searchuser(transaction->sender))->name,transaction->sender)==0){
@@ -136,9 +137,9 @@ struct User* searchuser(char* username){
   int i = 0; //Index
   while (i < count){
     if(strcmp((&users[i])->name, username)==0){
-      printf("User search Successful.\n");
+      printf("User search Successful: %s.\n",(&users[i])->name);
       free(users);
-      return &(users[i]);
+      return (&users[i]);
     }
     i++;
   }
