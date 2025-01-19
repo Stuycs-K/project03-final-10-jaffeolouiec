@@ -17,6 +17,8 @@ void sigint_handler(int sig) {
     } else {
         printf("Error: Unable to delete the file.\n");
     }
+
+	exit(0);
 }
 
 void makeTransaction(struct Transaction transaction, struct User * user1, struct User * user2) {
