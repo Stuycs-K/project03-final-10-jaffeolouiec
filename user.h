@@ -1,5 +1,6 @@
 #define USER_FILE "bankData.dat"
 #define PIPE_NAME "bankPipe"
+#define BANK_TO_USER_PIPE "bankToUserPipe"
 #define BANK_FILE "allBankData.dat"
 
 struct User {

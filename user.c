@@ -53,32 +53,39 @@ void transaction(){
     scanf("%d", &transaction->confirmedPIN);
 		getchar();
 
-    int fd = open(PIPE_NAME, O_RDWR);
+    int fd = open(PIPE_NAME, O_WRONLY);
     if (fd < 0){
-        printf("Pipe Opening Error\n");
+        perror("Pipe Opening Error\n");
         return;
     }
 
     if (write(fd, transaction, sizeof(struct Transaction)) == -1) {
-				printf("Transaction Send Error\n");
+				perror("Transaction Send Error\n");
+        return;
+    }
+
+    close(fd);
+
+    int fd2 = open(BANK_TO_USER_PIPE, O_RDONLY);
+    if (fd2 < 0){
+        perror("Pipe Opening Error\n");
         return;
     }
     
-    else {
-        sleep(1);
-			  printf("Transaction Send Success!\n");
-        free(transaction);
-        char receipt[50];
-        ssize_t bytes_read = read(fd, receipt, 49);
-        if (bytes_read <= 0) {
-          perror("Error reading from file descriptor");
-          close(fd);
-          return;
-        }
-        receipt[bytes_read] = '\0';
-        printf("Transaction Status (From Bank): %s\n", receipt);
-        close(fd);
-		}
+    sleep(1);
+    printf("Transaction Send Success!\n");
+    free(transaction);
+    char receipt[50];
+    ssize_t bytes_read = read(fd2, receipt, 49);
+    if (bytes_read <= 0) {
+      perror("Error reading from file descriptor");
+      close(fd2);
+      return;
+    }
+    receipt[bytes_read] = '\0';
+    printf("Transaction Status (From Bank): %s\n", receipt);
+    close(fd2);
+
 }
 
 /*username would be a unique value*/
