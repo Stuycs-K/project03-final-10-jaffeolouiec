@@ -216,9 +216,6 @@ void withdraw(){
 	  if (user1->wallet < transaction->amount) {
     	char* message = "Insufficient funds.";
 		  printf("%s",message);
-    	write(fd2, message, strlen(message));
-		  close(fd2);
-		  sleep(1);
     	return;
 	  }
 	  // Make sure the transaction.amount is >= 0
