@@ -16,9 +16,10 @@ The user compiles via make compile. The user will then receive instructions on h
 
 ### How does the user interact with this program?
 First, in another terminal, run ./bank to make a bank.
-Then, enter ./user ''
+Then, users can enter ./user ''
 1.   'Create' makes a user.
 2.   'Transaction' lets you give money to another user.
 3.   'Deposit' lets you deposit money.
 4.   'Withdraw' lets you withdraw money.
 5.   'Info' gives you the information for one user.
+While not listed in the user instructions, the operator can also enter cat log.txt to see a history of bank processes.
