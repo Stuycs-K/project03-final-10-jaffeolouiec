@@ -156,7 +156,7 @@ void deposit(){
     scanf("%d", &transaction->confirmedPIN);
 		getchar();
 
-    struct User * user1 = searchuser(transaction.sender);
+    struct User * user1 = searchuser(transaction->sender);
 
     // See if the transaction should fail
 	  // See if both users exist
@@ -166,18 +166,18 @@ void deposit(){
     	return;
 	  }
 	  // See if user1's pin is right
-	  if (transaction.confirmedPIN != user1->PIN) {
+	  if (transaction->confirmedPIN != user1->PIN) {
     	char* message = "Incorrect PIN.";
       printf("%s",message);
     	return;
 	  }
 	  // Make sure the transaction.amount is >= 0
-	  if (transaction.amount < 0) {
+	  if (transaction->amount < 0) {
 		  char* message = "The amount should be a positive number.";
 		  printf("%s",message);
     	return;
 	  }
-    user1->wallet+=transaction.amount;
+    user1->wallet+=transaction->amount;
     printf("Deposit Success!\n");
     free(transaction);
 }
@@ -197,7 +197,7 @@ void withdraw(){
     scanf("%d", &transaction->confirmedPIN);
 		getchar();
 
-    struct User * user1 = searchuser(transaction.sender);
+    struct User * user1 = searchuser(transaction->sender);
 
     // See if the transaction should fail
 	  // See if both users exist
@@ -207,13 +207,13 @@ void withdraw(){
     	return;
 	  }
 	  // See if user1's pin is right
-	  if (transaction.confirmedPIN != user1->PIN) {
+	  if (transaction->confirmedPIN != user1->PIN) {
     	char* message = "Incorrect PIN.";
       printf("%s",message);
     	return;
 	  }
     // Make sure user1's bank account has enough money
-	  if (user1->wallet < transaction.amount) {
+	  if (user1->wallet < transaction->amount) {
     	char* message = "Insufficient funds.";
 		  printf("%s",message);
     	write(fd2, message, strlen(message));
@@ -222,16 +222,14 @@ void withdraw(){
     	return;
 	  }
 	  // Make sure the transaction.amount is >= 0
-	  if (transaction.amount < 0) {
+	  if (transaction->amount < 0) {
 		  char* message = "The amount should be a positive number.";
 		  printf("%s",message);
     	return;
 	  }
-    user1->wallet-=transaction.amount;
+    user1->wallet-=transaction->amount;
     printf("Withdraw Success!\n");
     free(transaction);
-
-
 }
 
 /*username would be a unique value*/
