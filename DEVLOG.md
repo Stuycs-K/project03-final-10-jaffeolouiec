@@ -47,6 +47,12 @@ Created basic files and function headers and outlined structs.
 Expanded description including how much time was spent on task.
 
 ## Otzar
+### 2025-01-20 - adding logging and bug fixes
+I added a log.txt file and I cleaned up the code.
+### 2025-01-19 - adding a second named pipe
+This replaces the RDWR pipe so that users can get the message back from the bank.
+### 2025-01-18 - tried adding semaphores
+It turns out that it works the same so we didn't end up using it.
 ### 2025-01-17 - redoing changeUser
 All I need to do is maybe delete the file and then write to it with the new users function.
 ### 2025-01-16 - changeUser

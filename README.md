@@ -25,3 +25,6 @@ Then, users can enter ./user ''
 5.   'Info' gives you the information for one user.
 
 While not listed in the user instructions, the operator can also enter cat log.txt to see a history of bank processes.
+
+# Video Link
+https://www.youtube.com/watch?v=YEfDnv15vbU
