@@ -7,6 +7,7 @@
 #include <sys/stat.h>
 #include "user.h"
 #include <dirent.h>
+#include <errno.h>
 
 void log(char * message) {
     int fd = open(LOG_FILE, O_WRONLY | O_APPEND | O_CREAT, 0644);
@@ -37,11 +38,15 @@ void createUser(){
     }
 
     // check if the user already exists
-    struct User * existing_user = searchuser(user.name);
-    if (existing_user != NULL) {
-        printf("User already exists\n");
-        free(existing_user);
-        return;
+    //first check if USER_FILE exists, if it does, continue to check within that file with search user
+    if (access(USER_FILE, F_OK) == 0) {
+      struct User * existing_user = searchuser(user.name);
+      if (existing_user != NULL) {
+          printf("User already exists\n");
+          free(existing_user);
+          return;
+      }
+      free(existing_user);
     }
 
     user.wallet = 100;
@@ -60,6 +65,7 @@ void createUser(){
     char * log_message;
     asprintf(&log_message, "user.c: User %s created\n", user.name);
     log(log_message);
+    free(log_message);
 }
 
 void transaction(){
