@@ -22,3 +22,4 @@ clean:
 	@rm -f bankToUserPipe
 	@rm -f bank
 	@rm -f client
+	@rm -f log.txt

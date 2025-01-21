@@ -2,6 +2,7 @@
 #define PIPE_NAME "userToBankPipe"
 #define BANK_TO_USER_PIPE "bankToUserPipe"
 #define BANK_FILE "allBankData.dat"
+#define LOG_FILE "log.txt"
 
 struct User {
     char name[64];
@@ -21,5 +22,6 @@ void createUser();
 void transaction();
 void getInfo();
 void changeUser(char* username, struct User * userToChange);
+void log(char* message);
 void deposit();
 void withdraw();
