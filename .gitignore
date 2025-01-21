@@ -2,7 +2,7 @@
 ./bank
 ./user
 ./bankData.dat
-log.txt
+./log.txt
 bank
 user
 bankData.dat
