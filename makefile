@@ -19,5 +19,6 @@ clean:
 	@rm -f user
 	@rm -f bankData.dat
 	@rm -f bankPipe
+	@rm -f bankToUserPipe
 	@rm -f bank
 	@rm -f client

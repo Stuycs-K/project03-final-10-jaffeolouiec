@@ -5,6 +5,10 @@
 #include <dirent.h>
 #include "user.h"
 
+void printError() {
+	printf("~~~~~~~~~~~~~~~~~~~~\nWelcome to the bank. First, in another terminal, run ./bank. Then, enter ./user Create, ./user Transaction, or ./user Info below to get started. Each of them does the following:\n1.   'Create' makes a user.\n2.   'Transaction' lets you give money to another user.\n3.   'Info' gives you the information for one user.\n~~~~~~~~~~~~~~~~~~~~\n");
+}
+
 int main(int argc, char* argv[]){
   if (argc == 2){
     if (strcmp(argv[1],"Create")==0){
@@ -18,11 +22,11 @@ int main(int argc, char* argv[]){
       getInfo();
     } 
     else{
-      printf("~~~~~~~~~~~~~~~~~~~~\nWelcome to the bank. Enter one of the ARGS='' below to get started:\n1.   'Create'\n2.   'Transaction'\n3.   'Info'\n~~~~~~~~~~~~~~~~~~~~\n");
+	printError();
     }
   }
   else{
-    printf("~~~~~~~~~~~~~~~~~~~~\nWelcome to the bank. Enter one of the ARGS='' below to get started:\n1.   'Create'\n2.   'Transaction'\n3.   'Info'\n~~~~~~~~~~~~~~~~~~~~\n");
+	printError();
   }
   return 0;
 }

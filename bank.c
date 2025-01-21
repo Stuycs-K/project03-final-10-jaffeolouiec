@@ -15,14 +15,14 @@ void sigint_handler(int sig) {
 
     // Attempt to delete the file
     if (remove(filename) == 0) {
-        printf("File 1 deleted successfully.\n");
+        printf("Pipe to bank deleted successfully.\n");
     } else {
         printf("Error: Unable to delete the file.\n");
     }
 
 	// Attempt to delete the file
 	if (remove(filename2) == 0) {
-		printf("File 2 deleted successfully.\n");
+		printf("Pipe to user deleted successfully.\n");
 	} else {
 		printf("Error: Unable to delete the file.\n");
 	}

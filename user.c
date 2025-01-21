@@ -172,6 +172,12 @@ void getInfo() {
   fgets(username, 64, stdin);
   // remove newline character
   username[strcspn(username, "\n")] = '\0';
+
+	// get the pin
+  int pin;
+	printf("Enter PIN: ");
+  scanf("%d", &pin);
+  getchar();
   
   // search for the user
   struct User * user = searchuser(username);
@@ -179,8 +185,13 @@ void getInfo() {
     printf("User not found\n");
     return;
   }
-  // print the user's info
-  printf("Name: %s\n", user->name);
-  printf("PIN: %d\n", user->PIN);
-  printf("Wallet: $%d\n", user->wallet);
+
+  // check if the PIN is correct
+  if (pin == user->PIN) {
+    // print the user's info
+    printf("Name: %s\n", user->name);
+    printf("Wallet: $%d\n", user->wallet);
+  } else {
+    printf("Incorrect PIN\n");
+  }
 }
