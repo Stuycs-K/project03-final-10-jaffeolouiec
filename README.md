@@ -11,8 +11,14 @@ We are building a bank application that demonstrates the functionality and conce
   
 ## Instructions:
 ### How does the user install/compile/run the program?
-Install via clone, then compile via make compile. Create an account using ./create_user.
+The user installs this bank program via cloning this repo.
+The user compiles via make compile. The user will then receive instructions on how to make a bank with make run, and user actions such as creating an account using ./user Create.
 
 ### How does the user interact with this program?
-./create_user creates a user.
-./transaction makes a transaction.
+First, in another terminal, run ./bank to make a bank.
+Then, enter ./user ''
+1.   'Create' makes a user.
+2.   'Transaction' lets you give money to another user.
+3.   'Deposit' lets you deposit money.
+4.   'Withdraw' lets you withdraw money.
+5.   'Info' gives you the information for one user.
