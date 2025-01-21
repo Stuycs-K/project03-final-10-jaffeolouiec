@@ -4,6 +4,8 @@ This document must be updated daily by EACH group member.
 
 ## Chris
 ### 2025-01-20
+Updated README to match the project.
+### 2025-01-20
 Added Deposit and Withdrawal functions (transactions with only one half), so that the user could deposit and withdraw money, bug fixed.
 ### 2025-01-18
 Worked on getting the bank to send back messages to the user that sent a transaction request.
@@ -27,6 +29,8 @@ Worked on user confirmation function/user search function, set layout w/ while l
 Started writing user confirmation function/user search function.
 ### 2025-01-10
 Fixed Typos
+### 2025-01-09
+Christopher was out this day.
 ### 2025-01-08
 Updated error handling and some formatting errors.
 ### 2025-01-08
