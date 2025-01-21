@@ -79,6 +79,7 @@ void getTransaction() {
 	if (user1 == NULL || user2 == NULL) {
    		char* message = "One or both users do not exist.";
     	write(fd2, message, strlen(message));
+		close(fd2);
 		sleep(1);
     	return;
 	}
@@ -86,6 +87,7 @@ void getTransaction() {
 	if (transaction.confirmedPIN != user1->PIN) {
     	char* message = "Incorrect PIN.";
     	write(fd2, message, strlen(message));
+		close(fd2);
 		sleep(1);
     	return;
 	}
@@ -94,6 +96,16 @@ void getTransaction() {
     	char* message = "Insufficient funds.";
 		printf("%s",message);
     	write(fd2, message, strlen(message));
+		close(fd2);
+		sleep(1);
+    	return;
+	}
+	// Make sure the transaction.amount is >= 0
+	if (transaction.amount < 0) {
+		char* message = "The amount should be a positive number.";
+		printf("%s",message);
+    	write(fd2, message, strlen(message));
+		close(fd2);
 		sleep(1);
     	return;
 	}
