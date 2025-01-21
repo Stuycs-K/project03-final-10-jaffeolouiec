@@ -8,18 +8,42 @@
 #include "user.h"
 #include <dirent.h>
 
+void log(char * message) {
+    int fd = open(LOG_FILE, O_WRONLY | O_APPEND | O_CREAT, 0644);
+    if (fd < 0){
+        printf("File Open Error\n");
+        return;
+    }
+    if (write(fd, message, strlen(message)) != strlen(message)){
+        printf("File Write Error\n");
+        close(fd);
+        return;
+    }
+    close(fd);
+}
+
 void createUser(){
     struct User user;
     printf("Enter new username: ");
     fgets(user.name, 64, stdin);
     // remove newline character
     user.name[strcspn(user.name, "\n")] = '\0';
+
     printf("Enter a 4-digit PIN: ");
     scanf("%d", &user.PIN);
     if (user.PIN < 1000 || user.PIN > 9999){
         printf("Invalid PIN\n");
         return;
     }
+
+    // check if the user already exists
+    struct User * existing_user = searchuser(user.name);
+    if (existing_user != NULL) {
+        printf("User already exists\n");
+        free(existing_user);
+        return;
+    }
+
     user.wallet = 100;
     int file = open(USER_FILE, O_WRONLY | O_APPEND | O_CREAT, 0644);
     if (file < 0){
@@ -32,6 +56,10 @@ void createUser(){
         return;
     }
     close(file);
+
+    char * log_message;
+    asprintf(&log_message, "user.c: User %s created\n", user.name);
+    log(log_message);
 }
 
 void transaction(){
@@ -61,30 +89,60 @@ void transaction(){
 
     if (write(fd, transaction, sizeof(struct Transaction)) == -1) {
 				perror("Transaction Send Error\n");
+        close(fd);
+        free(transaction);
+
+        // log message
+        char * log_message;
+        asprintf(&log_message, "user.c: Transaction failed: send error\n");
+        log(log_message);
+
         return;
     }
+
+    // else we can write to the log file success
+    char * log_message;
+    asprintf(&log_message, "user.c: Transaction request sent: from %s to %s for $%d\n", transaction->sender, transaction->receiver, transaction->amount);
+    log(log_message);
+
+    sleep(1);
+    printf("Transaction Send Success!\n");
 
     close(fd);
 
     int fd2 = open(BANK_TO_USER_PIPE, O_RDONLY);
     if (fd2 < 0){
         perror("Pipe Opening Error\n");
+
+        // log message
+        char * log_message;
+        asprintf(&log_message, "user.c: Transaction failed: receive error\n");
+        log(log_message);
+
         return;
     }
     
-    sleep(1);
-    printf("Transaction Send Success!\n");
     free(transaction);
     char receipt[50];
     ssize_t bytes_read = read(fd2, receipt, 49);
     if (bytes_read <= 0) {
       perror("Error reading from file descriptor");
       close(fd2);
+
+      // log message
+      char * log_message;
+      asprintf(&log_message, "user.c: Transaction failed: read error\n");
+      log(log_message);
+
       return;
     }
     receipt[bytes_read] = '\0';
     printf("Transaction Status (From Bank): %s\n", receipt);
     close(fd2);
+
+    // log message
+    asprintf(&log_message, "user.c: Transaction Status (From Bank): %s\n", receipt);
+    log(log_message);
 
 }
 
@@ -126,6 +184,11 @@ void changeUser(char* username, struct User * userToChange) {
   }
 
   free(users);
+
+  // now let's log the change
+  char * log_message;
+  asprintf(&log_message, "user.c: User %s updated\n", username);
+  log(log_message);
 }
                    
 
@@ -194,4 +257,12 @@ void getInfo() {
   } else {
     printf("Incorrect PIN\n");
   }
+
+  // free the memory
+  free(user);
+
+  // log the action
+  char * log_message;
+  asprintf(&log_message, "user.c: User %s info requested\n", username);
+  log(log_message);
 }

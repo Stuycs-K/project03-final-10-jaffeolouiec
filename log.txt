@@ -1,0 +1,6 @@
+User otzar created
+User chris created
+Transaction request sent: from otzar to chris for $20
+User otzar updated
+User chris updated
+Transaction Status (From Bank): Transaction Successful.
