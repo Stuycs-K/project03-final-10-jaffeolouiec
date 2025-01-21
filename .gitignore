@@ -2,9 +2,11 @@
 ./bank
 ./user
 ./bankData.dat
+log.txt
 bank
 user
 bankData.dat
+log.txt
 
 # Prerequisites
 *.d
