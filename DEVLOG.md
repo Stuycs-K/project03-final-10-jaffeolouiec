@@ -3,6 +3,10 @@
 This document must be updated daily by EACH group member.
 
 ## Chris
+### 2025-01-20
+Added Deposit and Withdrawal functions (transactions with only one half), so that the user could deposit and withdraw money, bug fixed.
+### 2025-01-18
+Worked on getting the bank to send back messages to the user that sent a transaction request.
 ### 2025-01-17
 Updated makefile clean to remove bank and user files and the bank pipe, updated make compile to compile the bank as well, removed old client files from the cryptocurrency project.
 ### 2025-01-16
