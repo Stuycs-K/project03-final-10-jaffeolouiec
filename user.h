@@ -21,3 +21,5 @@ void createUser();
 void transaction();
 void getInfo();
 void changeUser(char* username, struct User * userToChange);
+void deposit();
+void withdraw();

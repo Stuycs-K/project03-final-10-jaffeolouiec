@@ -85,7 +85,97 @@ void transaction(){
     receipt[bytes_read] = '\0';
     printf("Transaction Status (From Bank): %s\n", receipt);
     close(fd2);
+}
 
+void deposit(){
+		struct Transaction *transaction = malloc(sizeof(struct Transaction));
+
+		printf("Enter username: ");
+    fgets(transaction->sender, 64, stdin);
+    transaction->sender[strcspn(transaction->sender, "\n")] = '\0';
+    
+    printf("Enter amount of $: ");
+    scanf("%d", &transaction->amount);
+		getchar();
+    
+    printf("Enter PIN: ");
+    scanf("%d", &transaction->confirmedPIN);
+		getchar();
+
+    struct User * user1 = searchuser(transaction.sender);
+
+    // See if the transaction should fail
+	  // See if both users exist
+	  if (user1 == NULL) {
+   		char* message = "One or both users do not exist.";
+      printf("%s",message);
+    	return;
+	  }
+	  // See if user1's pin is right
+	  if (transaction.confirmedPIN != user1->PIN) {
+    	char* message = "Incorrect PIN.";
+      printf("%s",message);
+    	return;
+	  }
+	  // Make sure the transaction.amount is >= 0
+	  if (transaction.amount < 0) {
+		  char* message = "The amount should be a positive number.";
+		  printf("%s",message);
+    	return;
+	  }
+    user1->wallet+=transaction.amount;
+    printf("Deposit Success!\n");
+    free(transaction);
+}
+
+void withdraw(){
+		struct Transaction *transaction = malloc(sizeof(struct Transaction));
+
+		printf("Enter username: ");
+    fgets(transaction->sender, 64, stdin);
+    transaction->sender[strcspn(transaction->sender, "\n")] = '\0';
+    
+    printf("Enter amount of $: ");
+    scanf("%d", &transaction->amount);
+		getchar();
+    
+    printf("Enter PIN: ");
+    scanf("%d", &transaction->confirmedPIN);
+		getchar();
+
+    struct User * user1 = searchuser(transaction.sender);
+
+    // See if the transaction should fail
+	  // See if both users exist
+	  if (user1 == NULL) {
+   		char* message = "One or both users do not exist.";
+      printf("%s",message);
+    	return;
+	  }
+	  // See if user1's pin is right
+	  if (transaction.confirmedPIN != user1->PIN) {
+    	char* message = "Incorrect PIN.";
+      printf("%s",message);
+    	return;
+	  }
+    // Make sure user1's bank account has enough money
+	  if (user1->wallet < transaction.amount) {
+    	char* message = "Insufficient funds.";
+		  printf("%s",message);
+    	write(fd2, message, strlen(message));
+		  close(fd2);
+		  sleep(1);
+    	return;
+	  }
+	  // Make sure the transaction.amount is >= 0
+	  if (transaction.amount < 0) {
+		  char* message = "The amount should be a positive number.";
+		  printf("%s",message);
+    	return;
+	  }
+    user1->wallet-=transaction.amount;
+    printf("Withdraw Success!\n");
+    free(transaction);
 }
 
 /*username would be a unique value*/
